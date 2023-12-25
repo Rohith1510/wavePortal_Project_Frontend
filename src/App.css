@@ -1,0 +1,90 @@
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 64px;
+  
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  
+  
+}
+
+.header {
+  
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  
+}
+
+.bio {
+
+  text-align: center;
+  color: black;
+  margin-top: 16px;
+}
+
+.waveButton {
+  
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border: 0;
+  border-radius: 5px;
+  background-color: lightsteelblue;
+  
+}
+
+.walletButton {
+
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border: 0;
+  border-radius: 5px;
+  background-color: lightseagreen;
+
+}
+
+.dImage{
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+/* App.css */
+
+body {
+  background-image: url("src/bgImg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Adjust styles for smaller screens, if needed */
+}
+
+@media only screen and (min-device-width: 481px) {
+  /* Adjust styles for larger screens, if needed */
+}
+
+
+/* Add the rest of your existing styles below this line */
