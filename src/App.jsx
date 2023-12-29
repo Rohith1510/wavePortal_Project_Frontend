@@ -3,6 +3,7 @@ import "./App.css";
 import { ethers } from "ethers";
 import abi from "./utils/WavePortal.json";
 
+
 const getEthereumObject = () => window.ethereum;
 
 const App = () => {
@@ -73,20 +74,37 @@ const App = () => {
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-          Hey👋I'm Rohith
+          Hey {<img src='src/favicon.ico' alt="img" style={{height: "30px"}}/> } I'm Rohith
         </div>
         <div className="bio">
           Think, type, click – that's all it takes. Send your thoughts, share a smile, and let the magic happen with just a simple click.
           <b>Connect your Ethereum wallet and wave at me!</b>
         </div>
+
+
+
+        {!currentAccount && (
+        <button className="walletButton" onClick={connectWallet}>
+          Connect Wallet
+        </button>
+
+      )}
+      
+        <div class="form-group">
+          <label>
+            <input class="form-control" style={{width:'100%', marginLeft:"-6px"}} id="exampleFormControlTextarea1" rows="3" placeholder="Wave Me" />
+          </label>
+        </div>
         <button className="waveButton" onClick={wave}>
           Wave at Me
         </button>
-        {!currentAccount && (
-          <button className="walletButton" onClick={connectWallet}>
-            Connect Wallet
-          </button>
-        )}
+        
+      
+      
+        
+        
+       
+        
         <div className="dImage">
           <img src="src/img1.png" alt="The Image"></img>
         </div>

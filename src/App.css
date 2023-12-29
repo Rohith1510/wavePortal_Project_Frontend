@@ -15,12 +15,16 @@
   
 }
 
+
+
 .header {
   
   text-align: center;
   font-size: 32px;
   font-weight: 600;
-  
+  background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 .bio {
@@ -28,6 +32,7 @@
   text-align: center;
   color: black;
   margin-top: 16px;
+  
 }
 
 .waveButton {
@@ -52,6 +57,20 @@
 
 }
 
+.form-group{
+  margin-top: 16px;
+  border:0;
+  padding:8px;
+  border-radius: 5px;
+  width: 579px;
+}
+#exampleFormControlTextarea1{
+  background-image: linear-gradient(135deg, #bdc2e8 10%, #e6dee9 100%);
+  border:;
+  border-radius: 10px;
+  padding:8px;
+}
+
 .dImage{
   display: flex;
   justify-content: center;
@@ -60,7 +79,9 @@
 /* App.css */
 
 body {
-  background-image: url("src/bgImg.jpg");
+  /* background-image: url("src/bgImg.jpg"); */
+  /* background-image: linear-gradient(135deg, #cc208e 10%, #6713d2 100%); */
+  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
