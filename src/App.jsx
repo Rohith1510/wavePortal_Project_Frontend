@@ -8,8 +8,12 @@ const getEthereumObject = () => window.ethereum;
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [text, setText] = useState("");
+  const [allWaves, setAllWaves] = useState([]);
 
-  const contractAddress = "0xe4Eb62A13Aadd3c49434195E564f71D0542d9bAe";
+  console.log("Data-2",text);
+
+  const contractAddress = "0x6f172536F038198EfB8592267ef323aE334543ED";
   const contractABI = abi.abi;
 
   const connectWallet = async () => {
@@ -34,32 +38,36 @@ const App = () => {
   const wave = async () => {
     try {
       const { ethereum } = window;
-
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-        const wavePortalContract = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-        let count = await wavePortalContract.getTotalWaves();
-        console.log("Retrieved total wave count...", count.toNumber());
+        const waves = await wavePortalContract.wave(text);
+        console.log("Messaging...");
+        
+        const wavestotal = wavePortalContract.getAllWaves();
+        console.log("Got All Waves..",wavestotal)
+        
+        
+        let wavesCleaned = [];
+        for (let i = 0; i < wavestotal.length; i++) {
+          const wave = wavestotal[i];
+          wavesCleaned.push({
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message,
+          });
+        }
+        setAllWaves(wavesCleaned);
+        setText("");
 
-        const waveTxn = await wavePortalContract.wave();
-        console.log("Mining...", waveTxn.hash);
-
-        await waveTxn.wait();
-        console.log("Mined -- ", waveTxn.hash);
-
-        count = await wavePortalContract.getTotalWaves();
-        console.log("Retrieved total wave count...", count.toNumber());
       } else {
-        console.log("Ethereum object doesn't exist!");
+        console.log("Ethereum object doesn't exist!")
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error in wave function:', error.message);
+      console.error(error.stack);
     }
   };
 
@@ -70,6 +78,8 @@ const App = () => {
     }
   }, []);
 
+  console.log("allWaves",allWaves);
+
   return (
     <div className="mainContainer">
       <div className="dataContainer">
@@ -78,39 +88,43 @@ const App = () => {
         </div>
         <div className="bio">
           Think, type, click – that's all it takes. Send your thoughts, share a smile, and let the magic happen with just a simple click.
-          <b>Connect your Ethereum wallet and wave at me!</b>
+          <b>Connect your Ethereum (Sepolia) wallet and wave at me!</b>
         </div>
 
-
-
         {!currentAccount && (
-        <button className="walletButton" onClick={connectWallet}>
+        <button className="walletButton" onClick={ connectWallet }
+          >
           Connect Wallet
         </button>
-
       )}
       
         <div class="form-group">
           <label>
-            <input class="form-control" style={{width:'100%', marginLeft:"-6px"}} id="exampleFormControlTextarea1" rows="3" placeholder="Wave Me" />
+            <input class="form-control" style={{width:'100%', marginLeft:"-6px"}} id="exampleFormControlTextarea1" rows="3" placeholder="Wave Me" onChange={(e)=>{setText(e.target.value)}} />
           </label>
         </div>
         <button className="waveButton" onClick={wave}>
           Wave at Me
         </button>
-        
-      
-      
-        
-        
        
         
         <div className="dImage">
           <img src="src/img1.png" alt="The Image"></img>
         </div>
+
+        <div>
+          <h1>Hello Data</h1>
+        </div>
+        
+        <div>
+          <h1>Hello</h1>
+          {allWaves.map((wave, index) => {
+          <label>Address: {wave.address} Time: {wave.timestamp.toString()} Message: {wave.message}</label>
+          })}
+        </div>
       </div>
     </div>
   );
 };
-
+ 
 export default App;
